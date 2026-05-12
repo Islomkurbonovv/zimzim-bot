@@ -1,10 +1,11 @@
 import telebot
 import json
 import os
-from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 
 TOKEN = '8672670954:AAELhSlmKx-EhqRCiBRBWN8dQBuqSGZkkVE'
 ADMIN_ID = 337240477
+VIDEO_NOTE_ID = None  # Videoni botga yuborgandan keyin shu yerga file_id qo'yamiz
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -34,12 +35,21 @@ def start(message):
     keyboard.add(button)
     if message.chat.id == ADMIN_ID:
         keyboard.add(KeyboardButton('📢 Xabar yuborish'))
+    
+    if VIDEO_NOTE_ID:
+        bot.send_video_note(message.chat.id, VIDEO_NOTE_ID)
+    
     bot.send_message(
         message.chat.id,
         '👋 Assalomu alaykum! Zim-Zim rasmiy botiga xush kelibsiz.\n\n'
         '✅ Dastur bilan to\'liq tanishish va menejerdan batafsil ma\'lumot olish uchun pastdagi "Dastur bilan tanishish" tugmasini bosing.',
         reply_markup=keyboard
     )
+
+@bot.message_handler(content_types=['video_note'])
+def get_video_note_id(message):
+    if message.chat.id == ADMIN_ID:
+        bot.send_message(message.chat.id, f'✅ File ID:\n`{message.video_note.file_id}`', parse_mode='Markdown')
 
 @bot.message_handler(func=lambda m: m.text == '📢 Xabar yuborish' and m.chat.id == ADMIN_ID)
 def broadcast_button(message):
