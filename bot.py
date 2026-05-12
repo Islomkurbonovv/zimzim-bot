@@ -1,6 +1,7 @@
 import telebot
 import json
 import os
+import time
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 
 TOKEN = '8672670954:AAELhSlmKx-EhqRCiBRBWN8dQBuqSGZkkVE'
@@ -36,15 +37,17 @@ def start(message):
     if message.chat.id == ADMIN_ID:
         keyboard.add(KeyboardButton('📢 Xabar yuborish'))
     
-    if VIDEO_NOTE_ID:
-        bot.send_video_note(message.chat.id, VIDEO_NOTE_ID)
-    
     bot.send_message(
         message.chat.id,
         '👋 Assalomu alaykum! Zim-Zim rasmiy botiga xush kelibsiz.\n\n'
         '✅ Dastur bilan to\'liq tanishish va menejerdan batafsil ma\'lumot olish uchun pastdagi "Dastur bilan tanishish" tugmasini bosing.',
         reply_markup=keyboard
     )
+    
+    time.sleep(3)
+    
+    if VIDEO_NOTE_ID:
+        bot.send_video_note(message.chat.id, VIDEO_NOTE_ID)
 
 @bot.message_handler(content_types=['video_note'])
 def get_video_note_id(message):
