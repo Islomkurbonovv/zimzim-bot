@@ -28,11 +28,16 @@ def start(message):
     save_users(users)
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
-        text='🚀 Zim-Zim ni ochish',
+        text='🧭 Dastur bilan tanishish',
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
-    bot.send_message(message.chat.id, '👋 Xush kelibsiz!', reply_markup=keyboard)
+    bot.send_message(
+        message.chat.id,
+        '👋 Assalomu alaykum! Zim-Zim rasmiy botiga xush kelibsiz.\n\n'
+        '✅ Dastur bilan to\'liq tanishish va menejerdan batafsil ma\'lumot olish uchun pastdagi "Dastur bilan tanishish" tugmasini bosing.',
+        reply_markup=keyboard
+    )
 
 @bot.message_handler(commands=['broadcast'])
 def broadcast_start(message):
