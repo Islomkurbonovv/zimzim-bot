@@ -28,7 +28,7 @@ def start(message):
     save_users(users)
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
-        text='🧭 Dastur bilan tanishish',
+        text='🚀 Dastur bilan tanishish',
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
