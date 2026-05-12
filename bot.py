@@ -28,7 +28,7 @@ def start(message):
     save_users(users)
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
-        text='🧭 Dastur bilan tanishish',
+        text='🚀 Dastur bilan tanishish',
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
@@ -59,7 +59,7 @@ def do_broadcast(message):
     failed = 0
     for user_id in list(users):
         try:
-            bot.forward_message(user_id, message.chat.id, message.message_id)
+            bot.copy_message(user_id, message.chat.id, message.message_id)
             success += 1
         except Exception as e:
             failed += 1
