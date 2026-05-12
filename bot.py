@@ -1,7 +1,7 @@
 import telebot
 import json
 import os
-from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 
 TOKEN = '8672670954:AAELhSlmKx-EhqRCiBRBWN8dQBuqSGZkkVE'
 ADMIN_ID = 337240477
@@ -28,16 +28,23 @@ def start(message):
     save_users(users)
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
-        text='🚀 Dastur bilan tanishish',
+        text='🧭 Dastur bilan tanishish',
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
+    if message.chat.id == ADMIN_ID:
+        keyboard.add(KeyboardButton('📢 Xabar yuborish'))
     bot.send_message(
         message.chat.id,
         '👋 Assalomu alaykum! Zim-Zim rasmiy botiga xush kelibsiz.\n\n'
         '✅ Dastur bilan to\'liq tanishish va menejerdan batafsil ma\'lumot olish uchun pastdagi "Dastur bilan tanishish" tugmasini bosing.',
         reply_markup=keyboard
     )
+
+@bot.message_handler(func=lambda m: m.text == '📢 Xabar yuborish' and m.chat.id == ADMIN_ID)
+def broadcast_button(message):
+    bot.send_message(message.chat.id, f'📢 {len(users)} ta obunachi bor.\n\nXabarni yuboring:')
+    bot.register_next_step_handler(message, do_broadcast)
 
 @bot.message_handler(commands=['broadcast'])
 def broadcast_start(message):
