@@ -13,6 +13,6 @@ def start(message):
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
-    bot.send_message(message.chat.id, '👋 Xush kelibsiz!', reply_markup=keyboard)
+    bot.send_message(message.chat.id, '👋 Assalomu alaykum! Zim-Zim rasmiy botiga xush kelibsiz.\n✅ Dastur bilan to\'liq tanishish va menejerdan batafsil ma\'lumot olish uchun pastdagi "Dastur bilan tanishish" tugmasini bosing.', reply_markup=keyboard)
 
 bot.polling()
