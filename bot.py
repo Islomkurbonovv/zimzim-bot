@@ -9,7 +9,7 @@ bot = telebot.TeleBot(TOKEN)
 def start(message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
-        text='🚀 Zim-Zim ni ochish',
+        text='📱 Dastur bilan tanishish',
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
