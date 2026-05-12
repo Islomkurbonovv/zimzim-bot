@@ -28,7 +28,7 @@ def start(message):
     save_users(users)
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
-        text='🚀 Dastur bilan tanishish',
+        text='🧭 Dastur bilan tanishish',
         web_app=WebAppInfo(url='https://ads.zim-zim.uz/')
     )
     keyboard.add(button)
@@ -59,18 +59,7 @@ def do_broadcast(message):
     failed = 0
     for user_id in list(users):
         try:
-            if message.content_type == 'text':
-                bot.send_message(user_id, message.text)
-            elif message.content_type == 'photo':
-                bot.send_photo(user_id, message.photo[-1].file_id, caption=message.caption or '')
-            elif message.content_type == 'video':
-                bot.send_video(user_id, message.video.file_id, caption=message.caption or '')
-            elif message.content_type == 'document':
-                bot.send_document(user_id, message.document.file_id, caption=message.caption or '')
-            elif message.content_type == 'voice':
-                bot.send_voice(user_id, message.voice.file_id)
-            elif message.content_type == 'sticker':
-                bot.send_sticker(user_id, message.sticker.file_id)
+            bot.forward_message(user_id, message.chat.id, message.message_id)
             success += 1
         except Exception as e:
             failed += 1
