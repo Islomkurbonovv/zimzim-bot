@@ -5,7 +5,7 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 
 TOKEN = '8672670954:AAELhSlmKx-EhqRCiBRBWN8dQBuqSGZkkVE'
 ADMIN_ID = 337240477
-VIDEO_NOTE_ID = None  # Videoni botga yuborgandan keyin shu yerga file_id qo'yamiz
+VIDEO_NOTE_ID = None  # DQACAgIAAxkBAAN5agM0kpBPMyiokxTYUBQHBiSkpjcAAit9AAI3O0lKV-INxnZyAAGVOwQ
 
 bot = telebot.TeleBot(TOKEN)
 
