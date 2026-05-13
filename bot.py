@@ -11,12 +11,14 @@ ADMIN_ID = 337240477
 VIDEO_NOTE_ID = 'DQACAgIAAxkBAAN5agM0kpBPMyiokxTYUBQHBiSkpjcAAit9AAI3O0lKV-INxnZyAAGVOwQ'
 SHEET_ID = '1FeFSvoNttbB-gmg-lJovLzchFc6DR0GqLfQq4bp0LZI'
 
+import os
+
 CREDS_JSON = {
   "type": "service_account",
   "project_id": "zimzim-bot",
-  "private_key_id": "62ea1824c97656891fe94ebe1e26e48ba24b9a4f",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCiPRRNv8U1T3Zt\nOsZyvGhEW1Ue2VCR/eZr4lsyJlkgGBknLq6HswyC+ITAEgLtsgSQbFANlOa0yEak\n5nhm6NwwRkB4+XnNOKPOB2dlGvN/TshbpxnIPJZvizxf7c2U/tp1pXs4Q19z8NT4\nrLc3WGYXn/HzGh92kcYQZ1PtSFUqJEL7v3wejZhF0bGzmgfx+hfWOxe+E1WIv2dj\nawAWh6zbaFgJuODJptxUHZid2YvQf5qwTcT+CqaLXTvSu63gUGT/saacePZlOgAZ\nTfBCta4CrYbd2hY1ZtGRn3Nlz8FhsMoDPlZr7auI4DPrB1VV8H23g1KjpK5bXMzU\nFvXF7GmDAgMBAAECggEAD6uKnH/bUmzcaWx14nskLwYLULF4wMEfUmhImq1tilYJ\nh+lQXjcDDFtopwyWT9MT8cckbEtnhSqa+C5yjq4LJnaCn6ypARNpbur0J6XUwwUf\nAQtAyEBh32A5cqKLasq62wYiwqpvO8mVKHe2MphNNBb0zaBGTbOCx+7TAmYsI6e5\nlzZWXDmLZsicnEdJovlD+8quwhhdNEV0qquugltv/0l1sMR4vO68xFeE/2HdKbKk\n+tY+DKLTMUFLpWRA3YaSnKpp2LimuCHdHAI0kxIEhoTcaSTaUsC4JaiMqVgx6mFC\nKbGa+CqHXVYyxpwQIfxs7yovMGDsu1DE/KyCDglaAQKBgQDQyZ8OS2BVE7m3ZDRO\npyUI9yAnYwuDqVeQnDJJHYYr5TK6dR01oMvfWAFpY7Kp/XaZke7PISnr6ch19mdM\nXMszbNSERusrDxLtM82g2kFgDiwfFco5OhDcFOskYlssKOx7S8+yddOIqdmHWjbn\nRDR5b96iD16sNsYFwVvKNLOIgQKBgQDG7M+5L8sqG7Ald3B8IgenNyllHyFoX5TF\n3kJ0PcKPp0m3X58/XUo3gG0D1iTBz869cGthfBq685QW4Rsaqu8Q7VUQvH/8Uipr\ntojw9smSxClIzW4diy/81RVGxH4TilT8/Agh/SjLmiFH1OKZVzEZuxn1TvNhVaAR\nL6CcTGnQAwKBgGeKpbOcE/D9MEvPiNU8tPQmQi7mQo6Py5ourA1wc9qO9sJbVBoF\nXTWs2j5er/r3dPqh0ZGs+7JAJSbDBOVs22TsYtQaq4OWHSe/WgmcU3GEdcMQtlH9\nBuFuClLn6BkVTnmy1hTFtBsBSJyEU9gLDg7vOLSb9LJpE3lFM/Uqf6KBAoGAQSQJ\nPdZVzFs2yn4bWrr2EJ7yskeIdBpgqI8I6fHThaE9dYwdpO1SwWwPxuLYNJNtWwG2\nWD0Ar9nV08wxSQFSuhNN+OYRbzok5BLpMydNiP8tmcaT2Z7bvwq0JfFwa8uv2wxZ\nSXASbOHzJgejkJ1J2eg4LumEr4oPmbEkAirPt6sCgYBx7kq8HwILI4dfpjqn/4jt\nKAjsK+fhGU4dqm9otqj3RaZS8xKSLcaC/TfbEnmLxuEWceNTBXeBSrYNetCWfCj9\nWvbMohDu4dg4yKVibI8ioeswnteQESHiEmjCUvLkJtBr9m5cdmxz423OVhupqq6k\nC6R8clASR8Lny6NLR3RSmg==\n-----END PRIVATE KEY-----\n",
-  "client_email": "zimzim-sheets@zimzim-bot.iam.gserviceaccount.com",
+  "private_key_id": os.environ.get("GOOGLE_PRIVATE_KEY_ID"),
+  "private_key": os.environ.get("GOOGLE_PRIVATE_KEY", "").replace("\\n", "\n"),
+  "client_email": os.environ.get("GOOGLE_CLIENT_EMAIL"),
   "client_id": "118363293589458683022",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
