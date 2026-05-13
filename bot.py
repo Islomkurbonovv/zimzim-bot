@@ -1,6 +1,7 @@
 import telebot
 import json
 import os
+import time
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 
 TOKEN = '8672670954:AAELhSlmKx-EhqRCiBRBWN8dQBuqSGZkkVE'
@@ -73,6 +74,7 @@ def do_broadcast(message):
         try:
             bot.copy_message(user_id, message.chat.id, message.message_id)
             success += 1
+            time.sleep(0.05)
         except Exception as e:
             failed += 1
             if 'blocked' in str(e).lower() or 'deactivated' in str(e).lower():
