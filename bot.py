@@ -1,36 +1,11 @@
 import telebot
 import json
 import os
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
-from datetime import datetime
 
 TOKEN = '8672670954:AAELhSlmKx-EhqRCiBRBWN8dQBuqSGZkkVE'
 ADMIN_ID = 337240477
 VIDEO_NOTE_ID = 'DQACAgIAAxkBAAN5agM0kpBPMyiokxTYUBQHBiSkpjcAAit9AAI3O0lKV-INxnZyAAGVOwQ'
-SHEET_ID = '1FeFSvoNttbB-gmg-lJovLzchFc6DR0GqLfQq4bp0LZI'
-
-import os
-
-CREDS_JSON = {
-  "type": "service_account",
-  "project_id": "zimzim-bot",
-  "private_key_id": os.environ.get("GOOGLE_PRIVATE_KEY_ID"),
-  "private_key": os.environ.get("GOOGLE_PRIVATE_KEY", "").replace("\\n", "\n"),
-  "client_email": os.environ.get("GOOGLE_CLIENT_EMAIL"),
-  "client_id": "118363293589458683022",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/zimzim-sheets%40zimzim-bot.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
-
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_dict(CREDS_JSON, scope)
-gc = gspread.authorize(creds)
-sheet = gc.open_by_key(SHEET_ID).sheet1
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -46,24 +21,12 @@ def save_users(users):
     with open(USERS_FILE, 'w') as f:
         json.dump(list(users), f)
 
-def save_to_sheet(user):
-    try:
-        records = sheet.col_values(2)
-        if str(user.id) not in records:
-            sana = datetime.now().strftime('%d.%m.%Y %H:%M')
-            username = f'@{user.username}' if user.username else '-'
-            ism = f'{user.first_name or ""} {user.last_name or ""}'.strip()
-            sheet.append_row([sana, str(user.id), ism, username])
-    except Exception as e:
-        print(f'Sheet xato: {e}')
-
 users = load_users()
 
 @bot.message_handler(commands=['start'])
 def start(message):
     users.add(message.chat.id)
     save_users(users)
-    save_to_sheet(message.from_user)
 
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     button = KeyboardButton(
