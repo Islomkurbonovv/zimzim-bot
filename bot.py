@@ -44,7 +44,6 @@ def start(message):
         reply_markup=keyboard
     )
     
-    time.sleep(3)
     
     if VIDEO_NOTE_ID:
         bot.send_video_note(message.chat.id, VIDEO_NOTE_ID)
